@@ -5,13 +5,13 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    // MIGHT NEED TO CHANGE THIS?
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: 'business'
-},
-console.log('Connected to the business database.')
+        host: 'localhost',
+        // MIGHT NEED TO CHANGE THIS?
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: 'business'
+    },
+    console.log('Connected to the business database.')
 );
 
 const start = () => {
@@ -85,26 +85,57 @@ const viewAllEmployees = () => {
     });
 };
 
-// const addEngineer = (employee) => {
-//     return inquirer.prompt([{
-//             type: 'input',
-//             name: 'github',
-//             message: "What is the employee's GitHub username?",
-//             validate: githubInput => {
-//                 if (githubInput) {
-//                     return true;
-//                 } else {
-//                     console.log('Please enter a GitHub username.');
-//                     return false;
-//                 }
-//             }
-//         }, ])
-//         .then(data => {
-//             const { name, email, id } = employee
-//             let temp = new Engineer(name, email, id, data.github);
-//             employees.push(temp);
-//             start();
-//         })
-// };
+const addDepartment = () => {
+    return inquirer
+        .prompt([{
+            type: 'input',
+            name: 'deptName',
+            message: "What is the name of the new department?",
+        }, ])
+        .then(data => {
+            const sql = `INSERT INTO departments (name) VALUES (?)`;
+            const params = [data.deptName]
+            db.query(sql, params, (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.table(rows);
+                start();
+            });
+        })
+};
+
+const addRole = () => {
+    return inquirer
+        .prompt([{
+            type: 'input',
+            name: 'roleTitle',
+            message: "What is the title of the new role?",
+        },
+        {
+            type: 'input',
+            name: 'roleSalary',
+            message: "What is the salary of the new role?",
+        },
+        {
+            type: 'input',
+            name: 'roleDept',
+            //need to add multiple choice for depts
+            message: "Which department is the new role in?",
+        }, ])
+        .then(data => {
+            const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
+            const params = [data.roleTitle, data.roleSalary, data.roleDept];
+            db.query(sql, params, (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.table(rows);
+                start();
+            });
+        })
+};
 
 start();
