@@ -29,6 +29,6 @@ CREATE TABLE employee (
   role_id INTEGER,
   manager_id INTEGER,
   FOREIGN KEY (role_id)
-  REFERENCES role(id)
+  REFERENCES role(id),
   CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
