@@ -19,21 +19,21 @@ VALUES
 ('Sales Lead', 100000, 4);
 
 INSERT INTO employees
-    (first_name, last_name)
+    (first_name, last_name, role_id)
 VALUES
-('Taylor', 'Swift'),
-('Elvis', 'Presley'),
-('Jimi', 'Hendrix'),
-('Jay', 'Z'),
-('Louis', 'Armstrong'),
-('Wolfgang', 'Mozart'),
-('Ray', 'Charles'),
-('Whitney', 'Houston'),
-('Aretha', 'Franklin'),
-('Dave', 'Grohl'),
-('Paul', 'McCartney'),
-('Phil', 'Collins'),
-('Frank', 'Sinatra'),
-('Lady', 'Gaga');
+('Taylor', 'Swift', 1),
+('Elvis', 'Presley', 2),
+('Jimi', 'Hendrix', 3),
+('Jay', 'Z', 4),
+('Louis', 'Armstrong', 5),
+('Wolfgang', 'Mozart', 6),
+('Ray', 'Charles', 7),
+('Whitney', 'Houston', 8),
+('Aretha', 'Franklin', 3),
+('Dave', 'Grohl', 7),
+('Paul', 'McCartney', 6),
+('Phil', 'Collins', 5),
+('Frank', 'Sinatra', 4),
+('Lady', 'Gaga', 3);
 
 

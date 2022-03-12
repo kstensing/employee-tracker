@@ -25,7 +25,7 @@ const start = () => {
         .then(answer => {
             switch (answer.toDo) {
                 case "View all departments":
-                    viewAllDepts(answer);
+                    viewAllDepts();
                     break;
                 case "View all roles":
                     viewAllRoles();
@@ -49,8 +49,32 @@ const start = () => {
         })
 };
 
-const viewAllDepts = (answer) => {
+const viewAllDepts = () => {
     const sql = `SELECT * FROM departments`;
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.table(rows);
+        start();
+    });
+};
+
+const viewAllRoles = () => {
+    const sql = `SELECT * FROM roles`;
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.table(rows);
+        start();
+    });
+};
+
+const viewAllEmployees = () => {
+    const sql = `SELECT * FROM employees`;
     db.query(sql, (err, rows) => {
         if (err) {
             console.error(err);
