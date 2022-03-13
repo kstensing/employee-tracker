@@ -74,12 +74,15 @@ const viewAllRoles = () => {
 };
 
 const viewAllEmployees = () => {
-    const sql = `SELECT employees.id, employees.first_name, employees.last_name, roles. title, roles.salary, departments.name AS "department", employees.manager_id AS "manager"
+    const sql = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, departments.dept_name AS "department"
                 FROM roles 
                 JOIN employees ON roles.id=employees.id
                 JOIN departments ON roles.department_id=departments.id
-                JOIN employees ON employees.id=employees.manager_id`;
+                `;
 
+
+                //JOIN employees ON employees.manager_id=employees.id
+                // employees.manager_id AS "manager"
     // const sql = `SELECT employees.*, roles.
     
     //             LEFT JOIN employees ON roles.id = role_id

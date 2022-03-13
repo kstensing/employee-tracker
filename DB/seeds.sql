@@ -21,18 +21,18 @@ VALUES
 INSERT INTO employees
     (first_name, last_name, role_id, manager_id)
 VALUES
-('Taylor', 'Swift', 1,7),
+('Taylor', 'Swift', 1,NULL),
 ('Elvis', 'Presley', 2,NULL),
-('Jimi', 'Hendrix', 3,NULL),
-('Jay', 'Z', 4, 4),
-('Louis', 'Armstrong', 5,9),
+('Jimi', 'Hendrix', 3,2),
+('Jay', 'Z', 4, NULL),
+('Louis', 'Armstrong', 5,NULL),
 ('Wolfgang', 'Mozart', 6,NULL),
-('Ray', 'Charles', 7,NULL),
-('Whitney', 'Houston', 8,6),
+('Ray', 'Charles', 7,5),
+('Whitney', 'Houston', 8,NULL),
 ('Aretha', 'Franklin', 3,NULL),
-('Dave', 'Grohl', 7,NULL),
-('Paul', 'McCartney', 6,8),
-('Phil', 'Collins', 5,NULL),
+('Dave', 'Grohl', 7,8),
+('Paul', 'McCartney', 6,NULL),
+('Phil', 'Collins', 5,9),
 ('Frank', 'Sinatra', 4,NULL),
 ('Lady', 'Gaga', 3,NULL);
 
