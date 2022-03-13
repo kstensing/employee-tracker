@@ -124,17 +124,25 @@ const addRole = () => {
             //need to add multiple choice for depts
             message: "Which department is the new role in?",
         }, ])
-        .then(data => {
-            const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
-            const params = [data.roleTitle, data.roleSalary, data.roleDept];
-            db.query(sql, params, (err, rows) => {
+        .then(data => {         
+            const sql = `SELECT * FROM departments WHERE name = ?`;
+            db.query(sql, data.roleDept, (err, rows) => {
                 if (err) {
                     console.error(err);
+                    console.log("That department doesn't exist!")
                     return;
                 }
-                console.table(rows);
-                start();
+                const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
+                db.query(sql, [data.roleTitle, data.roleSalary, rows[0].id], (err, rows) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    start();
+                });
             });
+
+
         })
 };
 
