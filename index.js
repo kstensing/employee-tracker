@@ -74,7 +74,17 @@ const viewAllRoles = () => {
 };
 
 const viewAllEmployees = () => {
-    const sql = `SELECT * FROM employees`;
+    const sql = `SELECT employees.id, employees.first_name, employees.last_name, roles. title, roles.salary, departments.name AS "department", employees.manager_id AS "manager"
+                FROM roles 
+                JOIN employees ON roles.id=employees.id
+                JOIN departments ON roles.department_id=departments.id
+                JOIN employees ON employees.id=employees.manager_id`;
+
+    // const sql = `SELECT employees.*, roles.
+    
+    //             LEFT JOIN employees ON roles.id = role_id
+    //             LEFT JOIN roles ON employees.role_id = roles.title
+    //             LEFT JOIN employees ON manager_id = employees.id`
     db.query(sql, (err, rows) => {
         if (err) {
             console.error(err);
