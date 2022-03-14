@@ -1,12 +1,10 @@
 require('dotenv').config();
 const mysql = require('mysql2');
-//const db = require('../../db/connection');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 
 const db = mysql.createConnection({
         host: 'localhost',
-        // MIGHT NEED TO CHANGE THIS?
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
         database: 'business'
