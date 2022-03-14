@@ -212,6 +212,48 @@ const addEmployee = () => {
         })
 };
 
+const updateEmployee = () => {
+    const sql = `SELECT concat(employees.first_name," ", employees.last_name) AS employee_name
+                        FROM employees`;
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        const employeesArray = rows.map(eachName => eachName.employee_name)
 
+        const sql = `SELECT roles.title
+                        FROM roles`;
+        db.query(sql, (err, roles) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            const rolesArray = roles.map(eachRole => eachRole.title);
+
+            return inquirer
+                .prompt([{
+                        type: 'list',
+                        name: 'employee',
+                        message: "Which employee's role would you like to update?",
+                        choices: employeesArray
+                    },
+                    {
+                        type: 'list',
+                        name: 'roles',
+                        message: "Select the updated role.",
+                        choices: rolesArray
+                    }
+                ])
+                .then(data => {
+                    //const updateSql = `UPDATE employees SET role_id = ?`
+                    console.log(data)
+                });
+
+        });
+        
+    });
+    start();
+};
 
 start();
