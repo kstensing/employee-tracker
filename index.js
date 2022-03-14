@@ -183,7 +183,6 @@ const addEmployee = () => {
             const roleSql = `SELECT * FROM roles WHERE title = ?`;
             console.log(data.role);
             db.query(roleSql, data.role, (err, rows) => {
-                console.log(rows)
                 if (err) {
                     console.error(err);
                     console.log("That role doesn't exist! Please add the role first, then add the employee.")
@@ -246,14 +245,29 @@ const updateEmployee = () => {
                     }
                 ])
                 .then(data => {
-                    //const updateSql = `UPDATE employees SET role_id = ?`
-                    console.log(data)
+                    const roleSql = `SELECT * FROM roles WHERE title=?`;
+                    db.query(roleSql, [data.roles], (err, rolesList) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+                        const splitName = data.employee.split(" ");
+                        const updateSql = `UPDATE employees SET role_id = ? WHERE first_name=? and last_name=?`;
+   
+                        db.query(updateSql, [rolesList[0].id, splitName[0], splitName[1]], (err, rows) => {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                            start();
+                        });
+                    });
                 });
 
         });
-        
+
     });
-    start();
+
 };
 
 start();
