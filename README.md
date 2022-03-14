@@ -1,8 +1,9 @@
-# employee-tracker
   # Employee-tracker
 
   ## Description
   Use this command-line application to manage your company's employee database. 
+
+  [DEMO VIDEO](https://drive.google.com/file/d/1Rhv97KTk0GsBMP0Bh6TxzQ8SfM1LeFNt/view)
 
   ## Table of Contents
 
@@ -23,6 +24,8 @@
   ## Tests
   To run tests, run the following command: 
       "npm test"
+
+      There are no tests yet for this application.
 
   ## Contributing
   See license info
