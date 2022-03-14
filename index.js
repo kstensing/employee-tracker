@@ -74,16 +74,20 @@ const viewAllRoles = () => {
 };
 
 const viewAllEmployees = () => {
-    const sql = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, departments.dept_name AS "department"
+    const sql = `SELECT employees.id, employees.first_name, employees.last_name, concat(m.first_name," ",m.last_name) AS "manager name", roles.title, roles.salary, departments.dept_name AS "department"
                 FROM roles 
                 JOIN employees ON roles.id=employees.id
                 JOIN departments ON roles.department_id=departments.id
+                LEFT JOIN employees m ON employees.manager_id=m.id
                 `;
 
 
                 //JOIN employees ON employees.manager_id=employees.id
                 // employees.manager_id AS "manager"
     // const sql = `SELECT employees.*, roles.
+    // SELECT employees.manager_id AS "manager"
+    // FROM employees a, employees m
+    // WHERE a.employees.id <> m.employees.id
     
     //             LEFT JOIN employees ON roles.id = role_id
     //             LEFT JOIN roles ON employees.role_id = roles.title
