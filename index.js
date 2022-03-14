@@ -101,14 +101,13 @@ const addDepartment = () => {
             message: "What is the name of the new department?",
         }, ])
         .then(data => {
-            const sql = `INSERT INTO departments (name) VALUES (?)`;
+            const sql = `INSERT INTO departments (dept_name) VALUES (?)`;
             const params = [data.deptName]
             db.query(sql, params, (err, rows) => {
                 if (err) {
                     console.error(err);
                     return;
                 }
-                console.table(rows);
                 start();
             });
         })
@@ -129,11 +128,10 @@ const addRole = () => {
         {
             type: 'input',
             name: 'roleDept',
-            //need to add multiple choice for depts
             message: "Which department is the new role in?",
         }, ])
         .then(data => {         
-            const sql = `SELECT * FROM departments WHERE name = ?`;
+            const sql = `SELECT * FROM departments WHERE dept_name = ?`;
             db.query(sql, data.roleDept, (err, rows) => {
                 if (err) {
                     console.error(err);
